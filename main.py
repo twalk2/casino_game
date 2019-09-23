@@ -2,18 +2,20 @@ import random
 wallet = []
 
 def wallet_balance():
-  if wallet == []:
-    try:
-      balance = int(input("Your wallet is currently empty. You'll need some money to play. How much would you like to add?\n "))
-      if balance >= 1:
-        wallet.append(balance)
-        user_function()
-      else:
-        print("Please enter a whole dollar amount.\n")
-        wallet_balance()
-    except ValueError:
-      print("Please enter a whole dollar amount.")
-      wallet_balance()
+    if wallet == []:
+        try:
+            balance = int(input("Your wallet is currently empty. You'll need some money to play. How much would you like to add?\n "))
+            if balance >= 1:
+                wallet.append(balance)
+                user_function()
+            else:
+                print("Please enter a whole dollar amount.\n")
+                wallet_balance()
+        except ValueError:
+            print("Please enter a whole dollar amount.")
+            wallet_balance()
+    else:
+        print(f"Your wallet currently has a balance of {wallet}")
 
 def user_function():
   try:
@@ -60,4 +62,5 @@ def guess_checker(user_choice, user_wager):
 
 
 wallet_balance()
-print(sum(wallet))
+end_price = sum(wallet)
+print(f"Your new balance is ${str(end_price)}")
