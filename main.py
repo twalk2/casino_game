@@ -5,7 +5,7 @@ wallet = []
 def wallet_balance():
   if wallet == [] or wallet == 0:
     try:
-      balance = int(input("Your wallet is currently empty. You'll need some money to play. How much would you like to add?\n "))
+      balance = int(input("\nYour wallet is currently empty. You'll need some money to play. How much would you like to add?\n "))
       
       if balance >= 1:
         wallet.append(balance)
@@ -18,9 +18,10 @@ def wallet_balance():
     except ValueError:
       print("Please enter a whole dollar amount.\n")
       wallet_balance()
+
   else:
     if sum(wallet) > 0:
-      user_input = input("Would you like to continue with, add to, or cashout out your wallet? 1.Continue, 2.Add, 3.Cashout\n")
+      user_input = input("Would you like to continue with, add to, or cashout your current balance?\n 1.Continue\n 2.Add\n 3.Cashout\n")
       
       if user_input == "1":
         user_function()
@@ -28,21 +29,33 @@ def wallet_balance():
       elif user_input == "2":
         add_to_function()
 
-      else:
-        print(f"Here is what you are leaving with: ${sum(wallet)}\n")
+      elif user_input == "3":
+        print(f"Congrats! Here is what you are leaving with: ${sum(wallet)}\n")
+        quit()
+
+      else: 
+        print("\nPlease enter a valid option.\n")
+        wallet_balance()
+
+    elif sum(wallet) == 0:
+      user_input = input("Would you like to add to your balance or leave with a balance of 0?\n 1.Add\n 2.Leave empty handed\n")
+      if user_input == 1:
+        add_to_function()
+      elif user_input == 2:
+        print("\nBad luck! Maybe next time! :)")
         
 
 
 
 def user_function():
   try:
-    user_wager = int(input("Are you ready to play Roulette? How much would you like to wager?\n"))
+    user_wager = int(input("\nAre you ready to play Roulette? How much would you like to wager?\n"))
 
     if user_wager <= sum(wallet):
       wallet.append(user_wager * -1)
 
     else:
-      print("You do not have enough to wager that amount.\n")
+      print("\nYou do not have enough to wager that amount.\n")
       user_function()
   
   except ValueError:
@@ -58,7 +71,7 @@ def user_function():
 
 
 def user_validation(user_wager): 
-  user_input = input("Choose a color to bet on: 1 = red, 2 = black...\n ")
+  user_input = input("\nChoose a color to bet on:\n 1 = red\n 2 = black\n ")
   if user_input == "1":
     guess_checker(user_input, user_wager)
 
@@ -66,7 +79,7 @@ def user_validation(user_wager):
     guess_checker(user_input, user_wager)
 
   else:
-    print("Please choose 1 or 2.\n")
+    print("\nPlease choose 1 or 2.\n")
     user_validation(user_wager)
 
 
@@ -108,18 +121,19 @@ def balance_display():
 
 def add_to_function():
   try:
-      user_input = int(input("How much would you like to add to your wallet?"))
+      user_input = int(input("\nHow much would you like to add to your wallet?\n"))
       
       if user_input >= 1:
         wallet.append(user_input)
+        print(f"You're new balance is {sum(wallet)}")
         user_function()
       
       else:
-        print("Please enter a whole dollar amount.\n")
+        print("\nPlease enter a whole dollar amount.\n")
         add_to_function()
     
   except ValueError:
-    print("Please enter a whole dollar amount.\n")
+    print("\nPlease enter a whole dollar amount.\n")
     add_to_function()
 
 
