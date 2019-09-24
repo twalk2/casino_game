@@ -3,7 +3,7 @@ wallet = []
 
 
 def wallet_balance():
-  if wallet == [] or wallet == 0:
+  if wallet == []:
     try:
       balance = int(input("\nYour wallet is currently empty. You'll need some money to play. How much would you like to add?\n "))
       
@@ -38,14 +38,18 @@ def wallet_balance():
         wallet_balance()
 
     elif sum(wallet) == 0:
-      user_input = input("Would you like to add to your balance or leave with a balance of 0?\n 1.Add\n 2.Leave empty handed\n")
+      user_input = int(input("Would you like to add to your balance or leave with a balance of 0?\n 1.Add\n 2.Leave empty handed\n"))
+
       if user_input == 1:
         add_to_function()
+
       elif user_input == 2:
         print("\nBad luck! Maybe next time! :)")
+        quit()
+      else: 
+        print("\nPlease choose 1 or 2.\n")
+        wallet_balance()
         
-
-
 
 def user_function():
   try:
@@ -95,11 +99,9 @@ def guess_checker(user_choice, user_wager):
       print("You win!\n")
       balance_display()
 
-
     else:
       print("You lost. Try again!\n")
       balance_display()
-
 
   else:
     print("The card is black!\n")
@@ -118,6 +120,7 @@ def balance_display():
   end_price = sum(wallet)
   print(f"Your new balance is ${str(end_price)}\n")
   wallet_balance()
+
 
 def add_to_function():
   try:
