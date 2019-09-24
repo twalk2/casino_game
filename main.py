@@ -12,11 +12,11 @@ def wallet_balance():
         user_function()
       
       else:
-        print("Please enter a whole dollar amount.\n")
+        print("\nPlease enter a whole dollar amount.\n")
         wallet_balance()
     
     except ValueError:
-      print("Please enter a whole dollar amount.\n")
+      print("\nPlease enter a whole dollar amount.\n")
       wallet_balance()
 
   else:
